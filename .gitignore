@@ -1,0 +1,4 @@
+bin/
+out/
+venv/
+*.png
