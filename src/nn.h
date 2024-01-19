@@ -1,9 +1,13 @@
+#pragma once
+
 #include <math.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <sys/types.h>
+
+#include "utils.h"
 
 #define MIN(a, b) (((a) < (b)) ? (a) : (b))
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
@@ -24,15 +28,6 @@ typedef struct Cfg {
   uint8_t n_op;             // number of output nodes
   double w_max; // weight is normalized to be between -w_max and +w_max
 } NNCfg;
-
-static inline uint8_t rand_bool() { return rand() > RAND_MAX / 2; }
-
-static inline uint8_t rand_uint8() { return rand() % (UINT8_MAX + 1); }
-
-static inline uint16_t rand_uint16() { return rand() % (UINT16_MAX + 1); }
-
-/** Returns a random number between 0 and 1 */
-static inline double rand01() { return (double)rand() / RAND_MAX; }
 
 /** Normalize `uint16 weight` to be between -w_max and +w_max */
 static inline double w_norm(uint16_t w, double w_max) {
