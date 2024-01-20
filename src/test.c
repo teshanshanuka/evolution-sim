@@ -4,6 +4,8 @@
 
 #include "activation.h"
 #include "nn.h"
+#include "amt.h"
+#include "world.h"
 
 const char *to_binary(char *buf, uint16_t n, uint8_t len) {
   for (int i = len - 1; i >= 0; i--)
@@ -102,11 +104,23 @@ void test_nn_gen() {
   }
 }
 
+void test_amt_rand_step() {
+  const World world = create_world(10, 10);
+  Amt amt = create_random_amt(&world);
+
+  for (int i = 0; i < 1000; i++) {
+    step_rand(&world, &amt);step_rand(&world, &amt);
+    if (amt.x >= 10 || amt.y >= 10) printf("out of bounds! x: %u, y: %u\n", amt.x, amt.y);
+  }
+  printf("Final position: %u, %u\n", amt.x, amt.y);
+}
+
 int main() {
   // test_create_genome();
   // test_mutation();
   // test_w_norm();
   // test_calculate();
-  test_nn_gen();
+  // test_nn_gen();
+  test_amt_rand_step();
   return 0;
 }
